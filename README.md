@@ -1,6 +1,8 @@
 # balaboba
 
-Модуль для взаимодействия с [Яндекс Балабоба](https://yandex.ru/lab/yalm).
+# На данный момент работает только [асинхронная версия библиотеки](https://github.com/monosans/aiobalaboba).
+
+Обёртка для [Яндекс Балабоба](https://yandex.ru/lab/yalm).
 
 Асинхронная версия [здесь](https://github.com/monosans/aiobalaboba).
 
@@ -10,13 +12,9 @@
 python -m pip install balaboba
 ```
 
-Или просто скопируйте [код](https://github.com/monosans/balaboba/blob/main/balaboba/__init__.py) себе.
-
-## Пример использования
+## Примеры использования
 
 ### Базовый пример
-
-Используется стандартный вариант стилизации, для запроса создаётся новый экземпляр requests.Session:
 
 ```python
 from balaboba import balaboba
@@ -27,17 +25,21 @@ print(response)
 
 Вывод: `Привет! Я рад тебя видеть на моём канале. Здесь ты сможешь встретить много интересных аниме, музыки, видео, и многого другого.`
 
-### Продвинутый пример
+### Варианты стилизации
 
-Используется 11-ый вариант стилизации "Народные мудрости", для запроса используется существующий экземпляр requests.Session:
+Функции `balaboba` в качестве аргумента `intro` можно передать желаемый вариант стилизации. Номера всех вариантов стилизации есть в [докстринге](https://github.com/monosans/balaboba/blob/main/balaboba/_balaboba.py#L24). В примере используется 11-й вариант стилизации "Народные мудрости" ([полный код примера](https://github.com/monosans/balaboba/blob/main/examples/style.py)):
 
 ```python
-from balaboba import balaboba
-from requests import Session
+response = balaboba("Привет", intro=11)
+```
 
+### Свой экземпляр requests.Session
+
+Функции `balaboba` в качестве аргумента `session` можно передать экземпляр requests.Session ([полный код примера](https://github.com/monosans/balaboba/blob/main/examples/client_session.py)):
+
+```python
 with Session() as session:
-    response = balaboba("Привет", intro=11, session=session)
-print(response)
+    response = balaboba("Привет", session=session)
 ```
 
 ## Дисклеймер с сайта
@@ -46,4 +48,4 @@ print(response)
 
 ## License / Лицензия
 
-[MIT](LICENSE)
+[MIT](https://github.com/monosans/balaboba/blob/main/LICENSE)

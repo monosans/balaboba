@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "balaboba"
+version = "1.0.3"
+description = "Wrapper for Yandex Balaboba"
+authors = ["monosans <hsyqixco@protonmail.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/monosans/balaboba"
+keywords = [ "yalm" ]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Natural Language :: Russian",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+requests = "^2.25.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
