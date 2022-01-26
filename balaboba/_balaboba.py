@@ -35,6 +35,8 @@ def balaboba(
             11 - Народные мудрости.
             12 - Балабоба x Garage.
             18 - Новый Европейский Театр.
+            19 - Яндекс.Директ.
+            20 - Новогодние открытки.
         session (Optional[Session], optional): По умолчанию None.
 
     Returns:
