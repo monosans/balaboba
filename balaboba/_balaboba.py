@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from typing import Optional
 
-from requests import Session
+from cloudscraper import CloudScraper
 
 
-def fetch(query: str, intro: int, session: Session) -> str:
+def fetch(query: str, intro: int, session: CloudScraper) -> str:
     with session.post(
         "https://yandex.ru/lab/api/yalm/text3",
         json={"query": query, "intro": intro, "filter": 1},
@@ -14,7 +14,7 @@ def fetch(query: str, intro: int, session: Session) -> str:
 
 
 def balaboba(
-    query: str, *, intro: int = 0, session: Optional[Session] = None
+    query: str, *, intro: int = 0, session: Optional[CloudScraper] = None
 ) -> str:
     """Отправка запроса Яндекс Балабобе.
 
@@ -42,5 +42,5 @@ def balaboba(
     """
     if session:
         return fetch(query, intro, session)
-    with Session() as session:
+    with CloudScraper.create_scraper() as session:
         return fetch(query, intro, session)

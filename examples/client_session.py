@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Используется существующий экземпляр requests.Session."""
+"""Используется существующий экземпляр cloudscraper.CloudScraper"""
 from balaboba import balaboba
-from requests import Session
+from cloudscraper import create_scraper
 
-with Session() as session:
+with create_scraper() as session:
     response = balaboba("Привет", session=session)
 print(response)

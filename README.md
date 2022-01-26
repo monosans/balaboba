@@ -1,7 +1,5 @@
 # balaboba
 
-# На данный момент работает только [асинхронная версия библиотеки](https://github.com/monosans/aiobalaboba).
-
 Обёртка для [Яндекс Балабоба](https://yandex.ru/lab/yalm).
 
 Асинхронная версия [здесь](https://github.com/monosans/aiobalaboba).
@@ -33,12 +31,12 @@ print(response)
 response = balaboba("Привет", intro=11)
 ```
 
-### Свой экземпляр requests.Session
+### Свой экземпляр cloudscraper.CloudScraper
 
-Функции `balaboba` в качестве аргумента `session` можно передать экземпляр requests.Session ([полный код примера](https://github.com/monosans/balaboba/blob/main/examples/client_session.py)):
+Функции `balaboba` в качестве аргумента `session` можно передать экземпляр `cloudscraper.CloudScraper` ([полный код примера](https://github.com/monosans/balaboba/blob/main/examples/client_session.py)):
 
 ```python
-with Session() as session:
+with CloudScraper() as session:
     response = balaboba("Привет", session=session)
 ```
 
