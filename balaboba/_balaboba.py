@@ -40,7 +40,7 @@ def balaboba(
     Returns:
         str: Ответ Балабобы.
     """
-    if session:
+    if isinstance(session, CloudScraper):
         return fetch(query, intro, session)
     with CloudScraper.create_scraper() as session:
         return fetch(query, intro, session)
