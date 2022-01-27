@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-from typing import Optional
+from typing import Optional, Union
 
 from cloudscraper import CloudScraper
+from requests import Session
 
 
 def fetch(query: str, intro: int, session: CloudScraper) -> str:
@@ -14,7 +15,10 @@ def fetch(query: str, intro: int, session: CloudScraper) -> str:
 
 
 def balaboba(
-    query: str, *, intro: int = 0, session: Optional[CloudScraper] = None
+    query: str,
+    *,
+    intro: int = 0,
+    session: Optional[Union[CloudScraper, Session]] = None,
 ) -> str:
     """Отправка запроса Яндекс Балабобе.
 
@@ -36,12 +40,16 @@ def balaboba(
             18 - Новый Европейский Театр.
             19 - Яндекс.Директ.
             20 - Новогодние открытки.
-        session (Optional[CloudScraper], optional): По умолчанию None.
+        session (Optional[Union[CloudScraper, Session]], optional):
+            По умолчанию None.
 
     Returns:
         str: Ответ Балабобы.
     """
     if isinstance(session, CloudScraper):
         return fetch(query, intro, session)
-    with CloudScraper.create_scraper() as session:
-        return fetch(query, intro, session)
+    if isinstance(session, Session):
+        with CloudScraper.create_scraper(session) as scraper:
+            return fetch(query, intro, scraper)
+    with CloudScraper.create_scraper() as scraper:
+        return fetch(query, intro, scraper)
