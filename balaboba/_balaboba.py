@@ -47,13 +47,13 @@ def balaboba(
         str: Ответ Балабобы.
 
     Examples:
-        >>> balaboba("Привет")
+        >>> response = balaboba("Привет")
 
-        >>> balaboba("Привет", intro=11)
+        >>> response = balaboba("Привет", intro=11)
 
         >>> from cloudscraper import create_scraper
         ... with create_scraper() as session:
-        ...     balaboba("Привет", session=session)
+        ...     response = balaboba("Привет", session=session)
     """
     if isinstance(session, CloudScraper):
         return fetch(query, intro, session)
