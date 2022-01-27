@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "balaboba"
-version = "1.0.5"
+version = "1.0.6"
 description = "Wrapper for Yandex Balaboba"
 authors = ["monosans <hsyqixco@protonmail.com>"]
 license = "MIT"
