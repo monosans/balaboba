@@ -25,7 +25,7 @@ print(response)
 
 ### Варианты стилизации
 
-Функции `balaboba` в качестве аргумента `intro` можно передать желаемый вариант стилизации. Номера всех вариантов стилизации есть в [докстринге](https://github.com/monosans/balaboba/blob/main/balaboba/_balaboba.py#L24). В примере используется 11-й вариант стилизации "Народные мудрости" ([полный код примера](https://github.com/monosans/balaboba/blob/main/examples/style.py)):
+Функции `balaboba` в качестве аргумента `intro` можно передать желаемый вариант стилизации. Номера всех вариантов стилизации есть в [докстринге](https://github.com/monosans/balaboba/blob/main/balaboba/_balaboba.py#L28). В примере используется 11-й вариант стилизации "Народные мудрости" ([полный код примера](https://github.com/monosans/balaboba/blob/main/examples/style.py)):
 
 ```python
 response = balaboba("Привет", intro=11)
@@ -36,9 +36,13 @@ response = balaboba("Привет", intro=11)
 Функции `balaboba` в качестве аргумента `session` можно передать экземпляр `cloudscraper.CloudScraper` ([полный код примера](https://github.com/monosans/balaboba/blob/main/examples/client_session.py)):
 
 ```python
-with CloudScraper() as session:
+from cloudscraper import create_scraper
+
+with create_scraper() as session:
     response = balaboba("Привет", session=session)
 ```
+
+Таким же образом можно передать экземпляр `requests.Session`, но эта возможность существует только для обратной совместимости.
 
 ## Дисклеймер с сайта
 
