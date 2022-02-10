@@ -38,8 +38,6 @@ def balaboba(
             10 - Гороскоп.
             11 - Народные мудрости.
             18 - Новый Европейский Театр.
-            19 - Яндекс.Директ.
-            20 - Новогодние открытки.
         session (Optional[Union[CloudScraper, Session]], optional):
             По умолчанию None.
 
@@ -58,7 +56,7 @@ def balaboba(
     if isinstance(session, CloudScraper):
         return fetch(query, intro, session)
     if isinstance(session, Session):
-        with CloudScraper.create_scraper(session) as scraper:
-            return fetch(query, intro, scraper)
+        with CloudScraper.create_scraper(session) as s:
+            return fetch(query, intro, s)
     with CloudScraper.create_scraper() as scraper:
         return fetch(query, intro, scraper)
