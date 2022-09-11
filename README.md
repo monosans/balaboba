@@ -1,53 +1,41 @@
 # balaboba
 
-Обёртка для [Яндекс Балабоба](https://yandex.ru/lab/yalm).
+[![CI](https://github.com/monosans/balaboba/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/monosans/balaboba/actions/workflows/ci.yml)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/monosans/balaboba/main.svg)](https://results.pre-commit.ci/latest/github/monosans/balaboba/main)
+[![codecov](https://codecov.io/gh/monosans/balaboba/branch/main/graph/badge.svg)](https://codecov.io/gh/monosans/balaboba)
 
-Асинхронная версия [здесь](https://github.com/monosans/aiobalaboba).
+Wrapper for [Yandex Balaboba](https://yandex.com/lab/yalm-en) ([Яндекс Балабоба](https://yandex.ru/lab/yalm)).
 
-## Установка
+Asynchronous version [here](https://github.com/monosans/aiobalaboba).
 
-```sh
+## Disclaimer
+
+The neural network doesn’t really know what it’s saying, so it can say absolutely anything. Don’t get offended if it says something that hurts your feelings. When sharing the texts, make sure they’re not offensive or violate the law.
+
+## Installation
+
+```bash
 python -m pip install balaboba
 ```
 
-## Примеры использования
-
-### Базовый пример
+## Usage example
 
 ```python
-from balaboba import balaboba
+from balaboba import Balaboba
 
-response = balaboba("Привет")
+bb = Balaboba()
+
+# Get text types
+intros = bb.intros(language="en")
+
+# Get the first text type
+intro = next(intros)
+
+# Print Balaboba's response to the "Hello" query
+response = bb.balaboba("Hello", intro=intro.number)
 print(response)
 ```
 
-Вывод: `Привет! Я рад тебя видеть на моём канале. Здесь ты сможешь встретить много интересных аниме, музыки, видео, и многого другого.`
-
-### Варианты стилизации
-
-Функции `balaboba` в качестве аргумента `intro` можно передать желаемый вариант стилизации. Номера всех вариантов стилизации есть в [докстринге](https://github.com/monosans/balaboba/blob/main/balaboba/_balaboba.py#L28). В примере используется 11-й вариант стилизации "Народные мудрости" ([полный код примера](https://github.com/monosans/balaboba/blob/main/examples/style.py)):
-
-```python
-response = balaboba("Привет", intro=11)
-```
-
-### Свой экземпляр cloudscraper.CloudScraper
-
-Функции `balaboba` в качестве аргумента `session` можно передать экземпляр `cloudscraper.CloudScraper` ([полный код примера](https://github.com/monosans/balaboba/blob/main/examples/client_session.py)):
-
-```python
-from cloudscraper import create_scraper
-
-with create_scraper() as session:
-    response = balaboba("Привет", session=session)
-```
-
-Таким же образом можно передать экземпляр `requests.Session`, но эта возможность существует только для обратной совместимости.
-
-## Дисклеймер с сайта
-
-Нейросеть не знает, что говорит, и может сказать всякое — если что, не обижайтесь. Распространяя получившиеся тексты, помните об ответственности.
-
-## License / Лицензия
+## License
 
 [MIT](https://github.com/monosans/balaboba/blob/main/LICENSE)

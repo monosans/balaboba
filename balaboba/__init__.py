@@ -1,4 +1,6 @@
-# -*- coding: utf-8 -*-
-from balaboba._balaboba import balaboba
+"""Wrapper for Yandex Balaboba."""
+from __future__ import annotations
 
-__all__ = ("balaboba",)
+from ._balaboba import Balaboba
+
+__all__ = ("Balaboba",)

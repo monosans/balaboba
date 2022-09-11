@@ -1,62 +1,88 @@
-# -*- coding: utf-8 -*-
-from typing import Optional, Union
+from __future__ import annotations
+
+import sys
+from typing import Any, Dict, Generator, NamedTuple, Optional
 
 from cloudscraper import CloudScraper
-from requests import Session
+
+if sys.version_info < (3, 8):  # pragma: no cover
+    from typing_extensions import Literal
+else:  # pragma: no cover
+    from typing import Literal
 
 
-def fetch(query: str, intro: int, session: CloudScraper) -> str:
-    with session.post(
-        "https://yandex.ru/lab/api/yalm/text3",
-        json={"query": query, "intro": intro, "filter": 1},
-    ) as resp:
-        r = resp.json()
-    return f"{r['query']}{r['text']}"
+class Intro(NamedTuple):
+    number: int
+    name: str
+    description: str
 
 
-def balaboba(
-    query: str,
-    *,
-    intro: int = 0,
-    session: Optional[Union[CloudScraper, Session]] = None,
-) -> str:
-    """Отправка запроса Яндекс Балабобе.
+class Balaboba:
+    """Wrapper for Yandex Balaboba."""
 
-    Args:
-        query (str): Текст для Балабобы.
-        intro (int, optional): Вариант стилизации.
-            0 - Без стиля. По умолчанию.
-            1 - Теории заговора.
-            2 - ТВ-репортажи.
-            3 - Тосты.
-            4 - Пацанские цитаты.
-            5 - Рекламные слоганы.
-            6 - Короткие истории.
-            7 - Подписи в Instagram.
-            8 - Короче, Википедия.
-            9 - Синопсисы фильмов.
-            10 - Гороскоп.
-            11 - Народные мудрости.
-            18 - Новый Европейский Театр.
-        session (Optional[Union[CloudScraper, Session]], optional):
-            По умолчанию None.
+    __slots__ = ("session",)
 
-    Returns:
-        str: Ответ Балабобы.
+    def __init__(self, session: Optional[CloudScraper] = None) -> None:
+        """Wrapper for Yandex Balaboba.
 
-    Examples:
-        >>> response = balaboba("Привет")
+        Args:
+            session: Instance of cloudscraper.CloudScraper. By default,
+                a new instance is created for each request.
+        """
+        self.session = session
 
-        >>> response = balaboba("Привет", intro=11)
+    def intros(
+        self, language: Literal["en", "ru"] = "ru"
+    ) -> Generator[Intro, None, None]:
+        """Get text types."""
+        endpoint = "intros" if language == "ru" else "intros_eng"
+        response = self._get_response(method="GET", endpoint=endpoint)
+        return (Intro(*intro) for intro in response["intros"])
 
-        >>> from cloudscraper import create_scraper
-        ... with create_scraper() as session:
-        ...     response = balaboba("Привет", session=session)
-    """
-    if isinstance(session, CloudScraper):
-        return fetch(query, intro, session)
-    if isinstance(session, Session):
-        with CloudScraper.create_scraper(session) as s:
-            return fetch(query, intro, s)
-    with CloudScraper.create_scraper() as scraper:
-        return fetch(query, intro, scraper)
+    def balaboba(self, query: str, *, intro: int) -> str:
+        """Get an answer from Balaboba.
+
+        Args:
+            query: Text for Balaboba.
+            intro: Text type number. You can get the list of types using
+                the intros method.
+        """
+        response = self._get_response(
+            method="POST",
+            endpoint="text3",
+            json={"query": query, "intro": intro, "filter": 1},
+        )
+        return f"{response['query']}{response['text']}"
+
+    def _get_response(
+        self,
+        *,
+        method: str,
+        endpoint: str,
+        json: Optional[Dict[str, Any]] = None,
+    ) -> Any:
+        if isinstance(self.session, CloudScraper):
+            return self._fetch(
+                method=method,
+                endpoint=endpoint,
+                json=json,
+                session=self.session,
+            )
+        with CloudScraper.create_scraper() as session:
+            return self._fetch(
+                method=method, endpoint=endpoint, json=json, session=session
+            )
+
+    def _fetch(
+        self,
+        *,
+        method: str,
+        endpoint: str,
+        json: Optional[Dict[str, Any]],
+        session: CloudScraper,
+    ) -> Any:
+        with session.request(
+            method, f"https://yandex.ru/lab/api/yalm/{endpoint}", json=json
+        ) as response:
+            response.raise_for_status()
+            return response.json()

@@ -421,7 +421,7 @@ python-versions = ">=3.6"
 name = "typing-extensions"
 version = "4.3.0"
 description = "Backported and Experimental Type Hints for Python 3.7+"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.7"
 
@@ -471,7 +471,7 @@ testing = ["func-timeout", "jaraco.itertools", "pytest (>=6)", "pytest-black (>=
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "cb7d21c6ce59cf3c8c760913c56cfb18422fa480055108b788effc0da6ab3397"
+content-hash = "262f7bc2773f02830097860d17cdbfbae0f016cdb85c9672da1aebd881079cc4"
 
 [metadata.files]
 attrs = [
