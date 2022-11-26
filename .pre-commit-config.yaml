@@ -43,6 +43,6 @@ repos:
       - id: mypy
         args: []
         additional_dependencies:
-          - pytest>=7.1,<8
+          - pytest>=7.2,<8
           - types-requests>=2.28,<3
           - typing-extensions>=3.7.4.3,<5; python_version < "3.8"
