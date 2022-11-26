@@ -22,6 +22,6 @@ def test_balaboba(language: Literal["en", "ru"], query: str) -> None:
     with Session() as session:
         b.session = session
         assert b.session is session
-        response = b.balaboba(query, text_type=choice(text_types).number)
+        response = b.balaboba(query, text_type=text_types[0])
     assert len(response) >= len(query)
     assert query.lower() in response.lower()

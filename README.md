@@ -25,8 +25,7 @@ from balaboba import Balaboba
 
 bb = Balaboba()
 text_types = bb.get_text_types(language="en")
-text_type = text_types[0].number
-response = bb.balaboba("Hello", intro=text_type)
+response = bb.balaboba("Hello", text_type=text_types[0])
 print(response)
 ```
 

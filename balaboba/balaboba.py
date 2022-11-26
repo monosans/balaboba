@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import sys
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from requests import Session
 
@@ -43,7 +43,7 @@ class Balaboba:
         response = self._session.get_response(method="GET", endpoint=endpoint)
         return [TextType(*intro) for intro in response["intros"]]
 
-    def balaboba(self, query: str, *, text_type: int) -> str:
+    def balaboba(self, query: str, text_type: Union[TextType, int]) -> str:
         """Get an answer from Balaboba.
 
         Args:
@@ -51,9 +51,12 @@ class Balaboba:
             text_type: Text type number. You can get the list of types using
                 the get_text_types method.
         """
+        intro = (
+            text_type.number if isinstance(text_type, TextType) else text_type
+        )
         response = self._session.get_response(
             method="POST",
             endpoint="text3",
-            json={"query": query, "intro": text_type, "filter": 1},
+            json={"query": query, "intro": intro, "filter": 1},
         )
         return "{}{}".format(response["query"], response["text"])
