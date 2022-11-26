@@ -29,10 +29,10 @@ bb = Balaboba()
 intros = bb.intros(language="en")
 
 # Get the first text type
-intro = next(intros)
+intro = intros[0].number
 
 # Print Balaboba's response to the "Hello" query
-response = bb.balaboba("Hello", intro=intro.number)
+response = bb.balaboba("Hello", intro=intro)
 print(response)
 ```
 

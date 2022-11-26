@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import sys
-from typing import Any, Dict, Generator, NamedTuple, Optional
+from typing import Any, Dict, List, NamedTuple, Optional
 
 from requests import Session
 
@@ -31,13 +31,11 @@ class Balaboba:
         """
         self.session = session
 
-    def intros(
-        self, language: Literal["en", "ru"] = "ru"
-    ) -> Generator[Intro, None, None]:
+    def intros(self, language: Literal["en", "ru"] = "ru") -> List[Intro]:
         """Get text types."""
         endpoint = "intros" if language == "ru" else "intros_eng"
         response = self._get_response(method="GET", endpoint=endpoint)
-        return (Intro(*intro) for intro in response["intros"])
+        return [Intro(*intro) for intro in response["intros"]]
 
     def balaboba(self, query: str, *, intro: int) -> str:
         """Get an answer from Balaboba.

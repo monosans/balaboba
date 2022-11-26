@@ -26,7 +26,7 @@ def test_balaboba(
     session = Session() if session_type else None
     try:
         b = Balaboba(session=session)
-        intros = tuple(b.intros(language))
+        intros = b.intros(language)
         response = b.balaboba(query, intro=choice(intros).number)
     finally:
         if isinstance(session, Session):
