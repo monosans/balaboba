@@ -24,15 +24,9 @@ python -m pip install balaboba
 from balaboba import Balaboba
 
 bb = Balaboba()
-
-# Get text types
-intros = bb.intros(language="en")
-
-# Get the first text type
-intro = intros[0].number
-
-# Print Balaboba's response to the "Hello" query
-response = bb.balaboba("Hello", intro=intro)
+text_types = bb.get_text_types(language="en")
+text_type = text_types[0].number
+response = bb.balaboba("Hello", intro=text_type)
 print(response)
 ```
 

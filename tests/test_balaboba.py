@@ -26,8 +26,8 @@ def test_balaboba(
     session = Session() if session_type else None
     try:
         b = Balaboba(session=session)
-        intros = b.intros(language)
-        response = b.balaboba(query, intro=choice(intros).number)
+        text_types = b.get_text_types(language)
+        response = b.balaboba(query, text_type=choice(text_types).number)
     finally:
         if isinstance(session, Session):
             session.close()

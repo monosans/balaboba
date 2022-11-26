@@ -11,7 +11,7 @@ else:  # pragma: no cover
     from typing import Literal
 
 
-class Intro(NamedTuple):
+class TextType(NamedTuple):
     number: int
     name: str
     description: str
@@ -31,24 +31,25 @@ class Balaboba:
         """
         self.session = session
 
-    def intros(self, language: Literal["en", "ru"] = "ru") -> List[Intro]:
-        """Get text types."""
+    def get_text_types(
+        self, language: Literal["en", "ru"] = "ru"
+    ) -> List[TextType]:
         endpoint = "intros" if language == "ru" else "intros_eng"
         response = self._get_response(method="GET", endpoint=endpoint)
-        return [Intro(*intro) for intro in response["intros"]]
+        return [TextType(*intro) for intro in response["intros"]]
 
-    def balaboba(self, query: str, *, intro: int) -> str:
+    def balaboba(self, query: str, *, text_type: int) -> str:
         """Get an answer from Balaboba.
 
         Args:
             query: Text for Balaboba.
-            intro: Text type number. You can get the list of types using
-                the intros method.
+            text_type: Text type number. You can get the list of types using
+                the get_text_types method.
         """
         response = self._get_response(
             method="POST",
             endpoint="text3",
-            json={"query": query, "intro": intro, "filter": 1},
+            json={"query": query, "intro": text_type, "filter": 1},
         )
         return "{}{}".format(response["query"], response["text"])
 
