@@ -3,7 +3,7 @@ from __future__ import annotations
 import sys
 from typing import Any, Dict, Generator, NamedTuple, Optional
 
-from cloudscraper import CloudScraper
+from requests import Session
 
 if sys.version_info < (3, 8):  # pragma: no cover
     from typing_extensions import Literal
@@ -22,11 +22,11 @@ class Balaboba:
 
     __slots__ = ("session",)
 
-    def __init__(self, session: Optional[CloudScraper] = None) -> None:
+    def __init__(self, session: Optional[Session] = None) -> None:
         """Wrapper for Yandex Balaboba.
 
         Args:
-            session: Instance of cloudscraper.CloudScraper. By default,
+            session: Instance of requests.Session. By default,
                 a new instance is created for each request.
         """
         self.session = session
@@ -61,14 +61,14 @@ class Balaboba:
         endpoint: str,
         json: Optional[Dict[str, Any]] = None,
     ) -> Any:
-        if isinstance(self.session, CloudScraper):
+        if isinstance(self.session, Session):
             return self._fetch(
                 method=method,
                 endpoint=endpoint,
                 json=json,
                 session=self.session,
             )
-        with CloudScraper.create_scraper() as session:
+        with Session() as session:
             return self._fetch(
                 method=method, endpoint=endpoint, json=json, session=session
             )
@@ -79,7 +79,7 @@ class Balaboba:
         method: str,
         endpoint: str,
         json: Optional[Dict[str, Any]],
-        session: CloudScraper,
+        session: Session,
     ) -> Any:
         with session.request(
             method, f"https://yandex.ru/lab/api/yalm/{endpoint}", json=json
