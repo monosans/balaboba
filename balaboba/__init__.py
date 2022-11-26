@@ -1,6 +1,7 @@
 """Wrapper for Yandex Balaboba."""
 from __future__ import annotations
 
-from ._balaboba import Balaboba, TextType
+from .balaboba import Balaboba
+from .text_type import TextType
 
 __all__ = ("Balaboba", "TextType")
