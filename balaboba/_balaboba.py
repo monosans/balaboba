@@ -5,8 +5,8 @@ from typing import List, Optional, Union
 
 from requests import Session
 
-from .http import HTTPSession
-from .text_type import TextType
+from ._http import HTTPSession
+from ._text_type import TextType
 
 if sys.version_info < (3, 8):  # pragma: no cover
     from typing_extensions import Literal
