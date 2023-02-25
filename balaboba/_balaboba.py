@@ -31,17 +31,13 @@ class Balaboba:
     def session(self, session: Optional[Session]) -> None:
         self._session.session = session
 
-    def get_text_types(
-        self, language: Literal["en", "ru"] = "ru"
-    ) -> List[TextType]:
+    def get_text_types(self, language: Literal["en", "ru"] = "ru") -> List[TextType]:
         endpoint = "intros" if language == "ru" else "intros_eng"
         response = self._session.get_response(method="GET", endpoint=endpoint)
         return [TextType(*intro) for intro in response["intros"]]
 
     def balaboba(self, query: str, text_type: Union[TextType, int]) -> str:
-        intro = (
-            text_type.number if isinstance(text_type, TextType) else text_type
-        )
+        intro = text_type.number if isinstance(text_type, TextType) else text_type
         response = self._session.get_response(
             method="POST",
             endpoint="text3",

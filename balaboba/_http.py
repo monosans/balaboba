@@ -12,18 +12,11 @@ class HTTPSession:
         self.session = session
 
     def get_response(
-        self,
-        *,
-        method: str,
-        endpoint: str,
-        json: Optional[Dict[str, Any]] = None,
+        self, *, method: str, endpoint: str, json: Optional[Dict[str, Any]] = None
     ) -> Any:
         if isinstance(self.session, Session):
             return self._fetch(
-                method=method,
-                endpoint=endpoint,
-                json=json,
-                session=self.session,
+                method=method, endpoint=endpoint, json=json, session=self.session
             )
         with Session() as session:
             return self._fetch(
