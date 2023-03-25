@@ -135,4 +135,3 @@ keep-runtime-typing = true
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-build-backend = "poetry.core.masonry.api"
