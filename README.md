@@ -1,8 +1,9 @@
 # balaboba
 
-[![CI](https://github.com/monosans/balaboba/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/monosans/balaboba/actions/workflows/ci.yml)
+[![CI](https://github.com/monosans/balaboba/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/monosans/balaboba/actions/workflows/ci.yml?query=event%3Apush+branch%3Amain)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/monosans/balaboba/main.svg)](https://results.pre-commit.ci/latest/github/monosans/balaboba/main)
-[![codecov](https://codecov.io/gh/monosans/balaboba/branch/main/graph/badge.svg)](https://codecov.io/gh/monosans/balaboba)
+[![Coverage](https://img.shields.io/codecov/c/github/monosans/balaboba/main)](https://codecov.io/gh/monosans/balaboba)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/balaboba)](https://pypi.org/project/balaboba/)
 
 Wrapper for [Yandex Balaboba](https://yandex.com/lab/yalm-en) ([Яндекс Балабоба](https://yandex.ru/lab/yalm)).
 
