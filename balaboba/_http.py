@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any, Optional
 
-from requests import Session
+from requests import Response, Session
 
 
 class HTTPSession:
@@ -13,17 +13,21 @@ class HTTPSession:
 
     def get_response(self, *, method: str, endpoint: str, json: Any = None) -> Any:
         if isinstance(self.session, Session):
-            return self._fetch(
+            response = self._fetch(
                 method=method, endpoint=endpoint, json=json, session=self.session
             )
-        with Session() as session:
-            return self._fetch(
-                method=method, endpoint=endpoint, json=json, session=session
-            )
+        else:
+            with Session() as session:
+                response = self._fetch(
+                    method=method, endpoint=endpoint, json=json, session=session
+                )
+        response.raise_for_status()
+        return response.json()
 
-    def _fetch(self, *, method: str, endpoint: str, json: Any, session: Session) -> Any:
+    def _fetch(
+        self, *, method: str, endpoint: str, json: Any, session: Session
+    ) -> Response:
         with session.request(
             method, f"https://yandex.ru/lab/api/yalm/{endpoint}", json=json
         ) as response:
-            response.raise_for_status()
-            return response.json()
+            return response
