@@ -24,6 +24,7 @@ def test_balaboba(language: Literal["en", "ru"], query: str) -> None:
         try:
             response = b.balaboba(query, text_type=text_types[0])
         except JSONDecodeError:  # pragma: no cover
-            return
-    assert len(response) >= len(query)
-    assert query.lower() in response.lower()
+            pass
+        else:  # pragma: no cover
+            assert len(response) >= len(query)
+            assert query.lower() in response.lower()
