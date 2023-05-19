@@ -1,7 +1,7 @@
 # balaboba
 
 [![CI](https://github.com/monosans/balaboba/actions/workflows/ci.yml/badge.svg)](https://github.com/monosans/balaboba/actions/workflows/ci.yml)
-[![PyPI Downloads](https://img.shields.io/pypi/dm/balaboba?logo=pypi)](https://pypi.org/project/balaboba/)
+[![Downloads](https://static.pepy.tech/badge/balaboba)](https://pepy.tech/project/balaboba)
 
 Wrapper for [Yandex Balaboba](https://yandex.com/lab/yalm-en) ([Яндекс Балабоба](https://yandex.ru/lab/yalm)).
 
