@@ -3,7 +3,7 @@ from __future__ import annotations
 import sys
 
 import pytest
-from requests import JSONDecodeError, Session
+from requests import Session
 
 from balaboba import Balaboba
 
@@ -21,10 +21,6 @@ def test_balaboba(language: Literal["en", "ru"], query: str) -> None:
     with Session() as session:
         b.session = session
         assert b.session is session
-        try:
-            response = b.balaboba(query, text_type=text_types[0])
-        except JSONDecodeError:  # pragma: no cover
-            pass
-        else:  # pragma: no cover
-            assert len(response) >= len(query)
-            assert query.lower() in response.lower()
+        response = b.balaboba(query, text_type=text_types[0])
+    assert len(response) >= len(query)
+    assert query.lower() in response.lower()
