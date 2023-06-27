@@ -35,7 +35,7 @@ covdefaults = "2.3.0"
 mypy = "1.4.1"
 pre-commit = "2.21.0"
 pytest = "7.4.0"
-coverage = { version = "7.2.7", extras = ["toml"] }
+pytest-cov = "4.1.0"
 ruff = "0.0.275"
 types-requests = "2.31.0.1"
 
