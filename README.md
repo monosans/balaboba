@@ -17,16 +17,9 @@ The neural network doesn’t really know what it’s saying, so it can say absol
 python -m pip install -U balaboba
 ```
 
-## Usage example
+## Documentation
 
-```python
-from balaboba import Balaboba
-
-bb = Balaboba()
-text_types = bb.get_text_types(language="en")
-response = bb.balaboba("Hello", text_type=text_types[0])
-print(response)
-```
+<https://balaboba.readthedocs.io/>
 
 ## License
 
