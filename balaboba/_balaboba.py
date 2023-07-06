@@ -20,13 +20,13 @@ class Balaboba:
 
     Examples:
         ```python
-        >>> from balaboba import Balaboba
-        >>>
-        >>> bb = Balaboba()
-        >>> text_types = bb.get_text_types(language="en")
-        >>> print(text_types)
-        >>> response = bb.balaboba("Hello", text_type=text_types[0])
-        >>> print(response)
+        from balaboba import Balaboba
+
+        bb = Balaboba()
+        text_types = bb.get_text_types(language="en")
+        print(text_types)
+        response = bb.balaboba("Hello", text_type=text_types[0])
+        print(response)
         ```
     """
 
