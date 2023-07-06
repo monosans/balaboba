@@ -16,12 +16,23 @@ else:  # pragma: >=3.8 cover
 
 
 class Balaboba:
-    """Wrapper for Yandex Balaboba."""
+    """Wrapper for Yandex Balaboba.
+
+    Examples:
+        ```python
+        >>> from balaboba import Balaboba
+        >>>
+        >>> bb = Balaboba()
+        >>> text_types = bb.get_text_types(language="en")
+        >>> print(text_types)
+        >>> response = bb.balaboba("Hello", text_type=text_types[0])
+        >>> print(response)
+        ```
+    """
 
     __slots__ = ("_session",)
 
     def __init__(self, session: Optional[Session] = None) -> None:
-        """Wrapper for Yandex Balaboba."""
         self._session = HTTPSession(session)
 
     @property
