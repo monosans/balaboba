@@ -19,7 +19,7 @@ python -m pip install -U balaboba
 
 ## Documentation
 
-<https://balaboba.readthedocs.io/>
+<https://balaboba.readthedocs.io>
 
 ## License
 
