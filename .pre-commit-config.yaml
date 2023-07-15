@@ -39,4 +39,3 @@ repos:
         additional_dependencies:
           - pytest<8
           - types-requests<3
-          - typing-extensions<5; python_version < "3.8"
